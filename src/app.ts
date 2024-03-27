@@ -9,8 +9,8 @@ app.use(bodyParser.urlencoded()) // ler as mensagens que vem do WhatsApp
 app.use(bodyParser.json()) // formato de leitura e resposta
 app.use(cors())
 
-
-app.post('/chat/send', async (req, res) =>{
+// envia a mensagem para um número no whatsapp
+app.post('/chat/send', async (req, res) =>{ 
     const {to, body} = req.body
     try{
         const result = await sendWhatsappMessage(`whatsapp:${to}`, body)
