@@ -1,5 +1,6 @@
 import express, { response } from "express"
 import bodyParser from "body-parser"
+import dotenv from 'dotenv'
 import cors from "cors"
 import { sendWhatsappMessage } from "./services/twilio"
 
@@ -8,6 +9,8 @@ const app = express()
 app.use(bodyParser.urlencoded()) // ler as mensagens que vem do WhatsApp
 app.use(bodyParser.json()) // formato de leitura e resposta
 app.use(cors())
+
+dotenv.config()
 
 // envia a mensagem para um número no whatsapp
 app.post('/chat/send', async (req, res) =>{ 
@@ -21,7 +24,7 @@ app.post('/chat/send', async (req, res) =>{
     }
 })
 
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.listen(port, () =>{
     console.log(`O servidor está rodando na porta: ${port}`)
